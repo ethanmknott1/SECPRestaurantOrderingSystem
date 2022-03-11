@@ -3,10 +3,16 @@ package orderflow;
 import foodobjects.FoodItem;
 import foodobjects.Ingredient;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GuiAPI {
     private Order order = new Order();
+    private DatabaseOutput databaseOutputObject = new DatabaseOutput();
+
+    public void backupOrderToDatabase(Order order) throws IOException {
+        databaseOutputObject.backupOrderToTXTFile(order);
+    }
 
     public void addMealToOrder(ArrayList<FoodItem> foodItems) {
         for(int i = 0; i < foodItems.size(); i++) {
