@@ -4,6 +4,7 @@ public enum IngredientlessItems {
     RANCH("Ranch"),
     KETCHUP("Ketchup"),
     MUSTARD("Mustard"),
+    MAYO("Mayo"),
     SALT("Salt");
 
     private String value;
