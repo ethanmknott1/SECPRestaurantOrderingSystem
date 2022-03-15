@@ -11,12 +11,12 @@ public class DatabaseOutput {
 
     public void backupOrderToTXTFile(Order order) throws IOException {
         //Block adapted from https://www.javatpoint.com/java-get-current-date
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy_MM_dd HH_mm_ss");
         LocalDateTime now = LocalDateTime.now();
 
         //Adapted from https://www.youtube.com/watch?v=k3K9KHPYZFc
-        File directoryFile = new File("database/");
-        File file = new File(directoryFile, dtf.format(now));
+        File directoryFile = new File("Database/");
+        File file = new File(directoryFile, dtf.format(now) + ".txt");
         FileWriter fw = new FileWriter(file);
         PrintWriter pw = new PrintWriter(fw);
 

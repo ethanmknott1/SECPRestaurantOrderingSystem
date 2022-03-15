@@ -1,12 +1,15 @@
 package foodobjects;
 
 public enum IngredientlessItems {
-    RANCH("Ranch"),
-    KETCHUP("Ketchup"),
-    MUSTARD("Mustard"),
-    MAYO("Mayo"),
-    SALT("Salt");
-
+    FRIES("Fries"),
+    TOTS("Tater Tots"),
+    HASHBROWNS("Hashbrowns"),
+    ONION_RINGS("Onion Rings"),
+    WATER("Water"),
+    COLA("Cola"),
+    COFFEE("Coffee"),
+    JUICE("Juice");
+    
     private String value;
 
     IngredientlessItems(String value) {

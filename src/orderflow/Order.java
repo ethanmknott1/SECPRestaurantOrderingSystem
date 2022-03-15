@@ -17,11 +17,18 @@ public class Order {
     }
 
     public void deleteFoodByID(int ID) {
-        for(int i = 0; i < order.size(); i++) {
+        int size = order.size();
+        int temp = -1;
+        for(int i = 0; i < size; i++) {
             if(ID == order.get(i).getID()) {
                 order.remove(i);
-                return;
+                temp = i;
+                break;
             }
+        }
+        for (int i = 0; i < order.size(); i++){
+            if (temp < order.get(i).getID())
+                order.get(i).setID(order.get(i).getID() - 1);
         }
     }
 

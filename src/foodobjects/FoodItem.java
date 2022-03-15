@@ -8,9 +8,8 @@ public class FoodItem {
     private int ID; //This will be an easy way to tell what item we need to delete from an order.
     private int price;
 
-    FoodItem(String foodName, int ID, ArrayList<Ingredient> ingredientList) {
+    public FoodItem(String foodName, ArrayList<Ingredient> ingredientList) {
         this.foodName = foodName;
-        this.ID = ID;
         this.ingredientList = ingredientList;
     }
 

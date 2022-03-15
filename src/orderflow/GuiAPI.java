@@ -9,18 +9,27 @@ import java.util.ArrayList;
 public class GuiAPI {
     private Order order = new Order();
     private DatabaseOutput databaseOutputObject = new DatabaseOutput();
+    private int counter = 0; // contains IDs that are set to FoodItems
 
     public void backupOrderToDatabase(Order order) throws IOException {
         databaseOutputObject.backupOrderToTXTFile(order);
     }
 
+    public Order getOrder(){
+        return order;
+    }
+
     public void addMealToOrder(ArrayList<FoodItem> foodItems) {
         for(int i = 0; i < foodItems.size(); i++) {
+            foodItems.get(i).setID(this.counter);
+            this.counter++;
             order.addFood(foodItems.get(i));
         }
     }
 
     public void addItemToOrder(FoodItem food) {
+        food.setID(this.counter);
+        this.counter++;
         order.addFood(food);
     }
 
@@ -52,6 +61,20 @@ public class GuiAPI {
 
     public void removeIngredientByFoodIDAndIngredientName(String ingredient, int foodID) {
         order.removeIngredientByFoodIDAndIngredientName(ingredient, foodID);
+    }
+
+    public String[] getFoodItemsFromOrder(){
+        ArrayList<FoodItem> items = order.getOrder();
+        String[] ret = new String[items.size()];
+        for (int i = 0; i < items.size(); i++){
+            ret[i] = items.get(i).getFoodName();
+        }
+
+        return ret;
+    }
+
+    public void clearOrder(){
+        this.order = new Order();
     }
 
 }

@@ -1,19 +1,22 @@
 // GUI dependencies
 import javax.swing.*; // Java GUI library
+import java.util.ArrayList;
 
 import foodobjects.FoodItem;
 
 import java.awt.BorderLayout;
 import java.awt.event.*;
+import java.io.IOException;
 import java.awt.GridLayout;
 import java.awt.Dimension;
+import java.awt.Color;
 
 // backend dependencies
-import orderflow.GuiAPI;
-import orderflow.Order;
+import orderflow.*;
+import foodobjects.*;
 
-public class GUI implements ActionListener {
-    static Order order;
+public class GUI{
+    static GuiAPI api;
 
     // global GUI objects (so they may be defined in constructor and referenced via ActionListener)
     JFrame mainFrame;
@@ -29,6 +32,10 @@ public class GUI implements ActionListener {
 
     // panel specifically used for creating visual spacing in the mainFrame BorderLayout
     JPanel spacing0;
+
+    // JList for showing order breakdown
+    //String [] data = {"Frodo", "Sam"};
+    JList<String> summaryList = new JList<String>();
 
     // various JButtons for menu items and order options
     JButton btn_burger;
@@ -84,7 +91,7 @@ public class GUI implements ActionListener {
 
         // Headers Panel
         headersPanel = new JPanel();
-        JLabel headers = new JLabel("<html><h1>Meals&emsp;&emsp;&emsp;A La Carte&emsp;&emsp;&emsp;Summary</h1></html>");
+        JLabel headers = new JLabel("<html><h1>Meals&emsp;&emsp;&emsp;&emsp;A La Carte&emsp;&emsp;&emsp;Summary</h1></html>");
         headersPanel.add(headers);
 
         // Center Panel that houses mealsPanel, aLaCartePanel, summaryPanel, and orderEditPanel
@@ -99,39 +106,56 @@ public class GUI implements ActionListener {
         mealsLayout.setHgap(10);
         mealsLayout.setVgap(10);
         mealsPanel.setLayout(mealsLayout);
-        mealsPanel.add(btn_burger);
-        mealsPanel.add(btn_double_burger);
-        mealsPanel.add(btn_crispy_sandwich);
-        mealsPanel.add(btn_grilled_sandwich);
-        mealsPanel.add(btn_fish_sandwich);
-        mealsPanel.add(btn_nuggets);
-        mealsPanel.add(btn_pep_pizza);
-        mealsPanel.add(btn_meat_pizza);
 
+        // add buttons and ActionListener to similarly behaving button
+        btn_burger.addActionListener(new CustomActionListener());
+        mealsPanel.add(btn_burger);
+        btn_double_burger.addActionListener(new CustomActionListener());
+        mealsPanel.add(btn_double_burger);
+        btn_crispy_sandwich.addActionListener(new CustomActionListener());
+        mealsPanel.add(btn_crispy_sandwich);
+        btn_grilled_sandwich.addActionListener(new CustomActionListener());
+        mealsPanel.add(btn_grilled_sandwich);
+        btn_fish_sandwich.addActionListener(new CustomActionListener());
+        mealsPanel.add(btn_fish_sandwich);
+        btn_nuggets.addActionListener(new CustomActionListener());
+        mealsPanel.add(btn_nuggets);
+        btn_pep_pizza.addActionListener(new CustomActionListener());
+        mealsPanel.add(btn_pep_pizza);
+        btn_meat_pizza.addActionListener(new CustomActionListener());
+        mealsPanel.add(btn_meat_pizza);
+        
         // A La Carte Panel layout
         aLaCartePanel = new JPanel();
         GridLayout aLaCarteLayout = new GridLayout(0, 2);
         aLaCarteLayout.setHgap(10);
         aLaCarteLayout.setVgap(10);
         aLaCartePanel.setLayout(aLaCarteLayout);
+        btn_fries.addActionListener(new CustomActionListener());
         aLaCartePanel.add(btn_fries);
+        btn_tots.addActionListener(new CustomActionListener());
         aLaCartePanel.add(btn_tots);
+        btn_hashbrowns.addActionListener(new CustomActionListener());
         aLaCartePanel.add(btn_hashbrowns);
+        btn_onion_rings.addActionListener(new CustomActionListener());
         aLaCartePanel.add(btn_onion_rings);
+        btn_water.addActionListener(new CustomActionListener());
         aLaCartePanel.add(btn_water);
+        btn_cola.addActionListener(new CustomActionListener());
         aLaCartePanel.add(btn_cola);
+        btn_coffee.addActionListener(new CustomActionListener());
         aLaCartePanel.add(btn_coffee);
+        btn_juice.addActionListener(new CustomActionListener());
         aLaCartePanel.add(btn_juice);
 
         // Summary Panel layout
         summaryPanel = new JPanel();
-        JList<FoodItem> summaryList = new JList<FoodItem>();
         summaryList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         summaryList.setLayoutOrientation(JList.VERTICAL);
         summaryList.setVisibleRowCount(-1);
-        summaryList.setPreferredSize(new Dimension(900, 900));
-        JScrollPane listScroller = new JScrollPane(summaryList);
-        listScroller.setPreferredSize(new Dimension(10, 10));
+        summaryList.setPreferredSize(new Dimension(350, 900));
+        //JScrollPane listScroller = new JScrollPane(summaryList);
+        //listScroller.setPreferredSize(new Dimension(10, 10));
         summaryPanel.add(summaryList);
 
         // Order Edit Panel layout
@@ -140,8 +164,11 @@ public class GUI implements ActionListener {
         orderEditLayout.setHgap(10);
         orderEditLayout.setVgap(80); 
         orderEditPanel.setLayout(orderEditLayout);
+        btn_item_options.addActionListener(new CustomActionListener());
         orderEditPanel.add(btn_item_options);
+        btn_delete_item.addActionListener(new CustomActionListener());
         orderEditPanel.add(btn_delete_item);
+        btn_complete_order.addActionListener(new CustomActionListener());
         orderEditPanel.add(btn_complete_order);
 
         // Add panels to the Center Panel to create adequate horizontal spacing
@@ -179,11 +206,63 @@ public class GUI implements ActionListener {
     }*/
 
     public static void main(String [] args){
-        order = new Order();
+        api = new GuiAPI();
         new GUI();
     }
 
-    public void actionPerformed(ActionEvent e){
-        
-    }
+    class CustomActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource() == btn_burger){
+                Meal burgerMeal = new Meal();
+                burgerMeal.setMealName("Single Cheeseburger Meal");
+                
+                ArrayList<Ingredient> ingredientList = new ArrayList<>();
+                ingredientList.add(new Ingredient("Buns"));
+                ingredientList.add(new Ingredient("Beef Patty"));
+                ingredientList.add(new Ingredient("Cheese"));
+                ingredientList.add(new Ingredient("Lettuce"));
+                ingredientList.add(new Ingredient("Tomato"));
+                ingredientList.add(new Ingredient("Onion"));
+                ingredientList.add(new Ingredient("Pickles"));
+                ingredientList.add(new Ingredient("Ketchup"));
+                ingredientList.add(new Ingredient("Mustard"));
+                
+                FoodItem burger = new FoodItem("Single Cheeseburger", ingredientList);
+                burgerMeal.addFood(burger);
+
+                FoodItem fries = new FoodItem(IngredientlessItems.FRIES.getValue(), new ArrayList<>());
+                burgerMeal.addFood(fries);
+
+                FoodItem cola = new FoodItem(IngredientlessItems.COLA.getValue(), new ArrayList<>());
+                burgerMeal.addFood(cola);
+
+                api.addMealToOrder(burgerMeal.getFoodList());
+                
+            }
+
+            if (e.getSource() == btn_delete_item){
+                int selectedIndex = summaryList.getSelectedIndex();
+                if (selectedIndex != -1){
+                    api.removeItemFromOrder(selectedIndex);
+                }
+            }
+
+            if (e.getSource() == btn_complete_order){
+                try{
+                    if(api.getOrder().getOrder().size() == 0)
+                        return;
+                    api.backupOrderToDatabase(api.getOrder());
+                    api.clearOrder();
+                }
+                catch (IOException ex){
+                    System.out.println("exception");
+                }
+            }
+            
+            summaryList.removeAll();
+            summaryList.setListData(api.getFoodItemsFromOrder());
+        }
+     }	
+
+    
 }
