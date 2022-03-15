@@ -15,8 +15,8 @@ public class DatabaseOutput {
         LocalDateTime now = LocalDateTime.now();
 
         //Adapted from https://www.youtube.com/watch?v=k3K9KHPYZFc
-        File directoryFile = new File("Database/");
-        File file = new File(directoryFile, dtf.format(now) + ".txt");
+        new File("database/").mkdirs();
+        File file = new File("database/", dtf.format(now) + ".txt");
         FileWriter fw = new FileWriter(file);
         PrintWriter pw = new PrintWriter(fw);
 

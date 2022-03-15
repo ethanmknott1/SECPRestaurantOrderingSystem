@@ -1,0 +1,18 @@
+2022_03_15 17_19_24 ORDER
+
+ITEMS
+Single Cheeseburger
+    Buns
+    Beef Patty
+    Cheese
+    Lettuce
+    Tomato
+    Onion
+    Pickles
+    Ketchup
+    Mustard
+
+Fries
+
+Cola
+

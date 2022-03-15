@@ -34,7 +34,6 @@ public class GUI{
     JPanel spacing0;
 
     // JList for showing order breakdown
-    //String [] data = {"Frodo", "Sam"};
     JList<String> summaryList = new JList<String>();
 
     // various JButtons for menu items and order options
