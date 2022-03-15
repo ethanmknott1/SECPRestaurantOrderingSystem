@@ -27,7 +27,10 @@ public class DatabaseOutput {
         for(int i = 0; i < order.getOrder().size(); i++) {
             pw.println(order.getOrder().get(i).getFoodName());
             for(int j = 0; j < order.getOrder().get(i).getIngredientList().size(); j++) {
-                pw.println("    " + order.getOrder().get(i).getIngredientList().get(j).getIngredient());
+                //This is where the output decides if an ingredient was selected or not
+                if (order.getOrder().get(i).getIngredientSelected().get(order.getOrder().get(i).getIngredientList().get(j).getIngredient())) {
+                    pw.println("    " + order.getOrder().get(i).getIngredientList().get(j).getIngredient());
+                }
             }
             pw.println("");
         }
