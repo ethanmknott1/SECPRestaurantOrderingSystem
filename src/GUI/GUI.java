@@ -47,7 +47,7 @@ public class GUI{
     JButton btn_meat_pizza;
     JButton btn_fries;
     JButton btn_tots;
-    JButton btn_hashbrowns;
+    JButton btn_mozz_stix;
     JButton btn_onion_rings;
     JButton btn_water;
     JButton btn_cola;
@@ -65,11 +65,11 @@ public class GUI{
         btn_grilled_sandwich = new JButton("<html>Grilled Chicken Sandwich<br />Side: Fries</html>");
         btn_fish_sandwich = new JButton("<html>Fish Fillet Sandwich<br />Side: Tater Tots</html>");
         btn_nuggets = new JButton("<html>10pc Chicken Nuggets<br />Side: Fries</html>");
-        btn_pep_pizza = new JButton("<html>Pepperoni Pizza<br />Side: Fries</html>");
-        btn_meat_pizza = new JButton("<html>Meat Lovers Pizza<br />Side: Fries</html>");
+        btn_pep_pizza = new JButton("<html>Pepperoni Pizza<br />Side: Mozzarella Sticks</html>");
+        btn_meat_pizza = new JButton("<html>Meat Lovers Pizza<br />Side: Mozzarella Sticks</html>");
         btn_fries = new JButton("French Fries");
         btn_tots = new JButton("Tater Tots");
-        btn_hashbrowns = new JButton("Hashbrowns");
+        btn_mozz_stix = new JButton("Mozzarella Sticks");
         btn_onion_rings = new JButton("Onion Rings");
         btn_water = new JButton("Water");
         btn_cola = new JButton("Cola");
@@ -134,8 +134,8 @@ public class GUI{
         aLaCartePanel.add(btn_fries);
         btn_tots.addActionListener(new CustomActionListener());
         aLaCartePanel.add(btn_tots);
-        btn_hashbrowns.addActionListener(new CustomActionListener());
-        aLaCartePanel.add(btn_hashbrowns);
+        btn_mozz_stix.addActionListener(new CustomActionListener());
+        aLaCartePanel.add(btn_mozz_stix);
         btn_onion_rings.addActionListener(new CustomActionListener());
         aLaCartePanel.add(btn_onion_rings);
         btn_water.addActionListener(new CustomActionListener());
@@ -239,14 +239,213 @@ public class GUI{
                 
             }
 
-            if (e.getSource() == btn_delete_item){
+            else if (e.getSource() == btn_double_burger){
+                Meal doubleBurgerMeal = new Meal();
+                doubleBurgerMeal.setMealName("Double Cheeseburger Meal");
+
+                ArrayList<Ingredient> ingredientList = new ArrayList<>();
+                ingredientList.add(new Ingredient("Buns"));
+                ingredientList.add(new Ingredient("Beef Patty x2"));
+                ingredientList.add(new Ingredient("Cheese"));
+                ingredientList.add(new Ingredient("Lettuce"));
+                ingredientList.add(new Ingredient("Tomato"));
+                ingredientList.add(new Ingredient("Onion"));
+                ingredientList.add(new Ingredient("Pickles"));
+                ingredientList.add(new Ingredient("Ketchup"));
+                ingredientList.add(new Ingredient("Mustard"));
+
+                FoodItem burger = new FoodItem("Double Cheeseburger", ingredientList);
+                doubleBurgerMeal.addFood(burger);
+
+                FoodItem fries = new FoodItem(IngredientlessItems.FRIES.getValue(), new ArrayList<>());
+                doubleBurgerMeal.addFood(fries);
+
+                FoodItem cola = new FoodItem(IngredientlessItems.COLA.getValue(), new ArrayList<>());
+                doubleBurgerMeal.addFood(cola);
+
+                api.addMealToOrder(doubleBurgerMeal.getFoodList());
+            }
+
+            else if (e.getSource() == btn_crispy_sandwich){
+                Meal crispySandwichMeal = new Meal();
+                crispySandwichMeal.setMealName("Crispy Chicken Sandwich Meal");
+
+                ArrayList<Ingredient> ingredientList = new ArrayList<>();
+                ingredientList.add(new Ingredient("Buns"));
+                ingredientList.add(new Ingredient("Fried Chicken Breast"));
+                ingredientList.add(new Ingredient("Tomato"));
+                ingredientList.add(new Ingredient("Pickles"));
+                ingredientList.add(new Ingredient("Mayo"));
+
+                FoodItem sandwich = new FoodItem("Crispy Chicken Sandwich", ingredientList);
+                crispySandwichMeal.addFood(sandwich);
+
+                FoodItem fries = new FoodItem(IngredientlessItems.FRIES.getValue(), new ArrayList<>());
+                crispySandwichMeal.addFood(fries);
+
+                FoodItem cola = new FoodItem(IngredientlessItems.COLA.getValue(), new ArrayList<>());
+                crispySandwichMeal.addFood(cola);
+
+                api.addMealToOrder(crispySandwichMeal.getFoodList());
+            }
+
+            else if (e.getSource() == btn_grilled_sandwich){
+                Meal grilledSandwichMeal = new Meal();
+                grilledSandwichMeal.setMealName("Crispy Chicken Sandwich Meal");
+
+                ArrayList<Ingredient> ingredientList = new ArrayList<>();
+                ingredientList.add(new Ingredient("Buns"));
+                ingredientList.add(new Ingredient("Grilled Chicken Breast"));
+                ingredientList.add(new Ingredient("Tomato"));
+                ingredientList.add(new Ingredient("Pickles"));
+                ingredientList.add(new Ingredient("Mayo"));
+
+                FoodItem sandwich = new FoodItem("Grilled Chicken Sandwich", ingredientList);
+                grilledSandwichMeal.addFood(sandwich);
+
+                FoodItem fries = new FoodItem(IngredientlessItems.FRIES.getValue(), new ArrayList<>());
+                grilledSandwichMeal.addFood(fries);
+
+                FoodItem cola = new FoodItem(IngredientlessItems.COLA.getValue(), new ArrayList<>());
+                grilledSandwichMeal.addFood(cola);
+
+                api.addMealToOrder(grilledSandwichMeal.getFoodList());
+            }
+
+            else if (e.getSource() == btn_fish_sandwich){
+                Meal fishSandwichMeal = new Meal();
+                fishSandwichMeal.setMealName("Fish Fillet Sandwich Meal");
+
+                ArrayList<Ingredient> ingredientList = new ArrayList<>();
+                ingredientList.add(new Ingredient("Buns"));
+                ingredientList.add(new Ingredient("Fish Fillet"));
+                ingredientList.add(new Ingredient("Cheese"));
+                ingredientList.add(new Ingredient("Lettuce"));
+                ingredientList.add(new Ingredient("Pickles"));
+
+                FoodItem sandwich = new FoodItem("Fish Fillet Sandwich", ingredientList);
+                fishSandwichMeal.addFood(sandwich);
+
+                FoodItem tots = new FoodItem(IngredientlessItems.TOTS.getValue(), new ArrayList<>());
+                fishSandwichMeal.addFood(tots);
+
+                FoodItem cola = new FoodItem(IngredientlessItems.COLA.getValue(), new ArrayList<>());
+                fishSandwichMeal.addFood(cola);
+
+                api.addMealToOrder(fishSandwichMeal.getFoodList());
+            }
+
+            else if (e.getSource() == btn_nuggets){
+                Meal nuggetsMeal = new Meal();
+                nuggetsMeal.setMealName("10pc Nuggets Meal");
+
+                FoodItem nugs = new FoodItem(IngredientlessItems.NUGS.getValue(), new ArrayList<>());
+                nuggetsMeal.addFood(nugs);
+
+                FoodItem fries = new FoodItem(IngredientlessItems.FRIES.getValue(), new ArrayList<>());
+                nuggetsMeal.addFood(fries);
+
+                FoodItem cola = new FoodItem(IngredientlessItems.COLA.getValue(), new ArrayList<>());
+                fishSandwichMeal.addFood(cola);
+
+                api.addMealToOrder(nuggetsMeal.getFoodList());
+            }
+
+            else if (e.getSource() == btn_pep_pizza){
+                Meal pepperoniPizzaMeal = new Meal();
+                pepperoniPizzaMeal.setMealName("Pepperoni Pizza Meal");
+                
+                ArrayList<Ingredient> ingredientList = new ArrayList<>();
+                ingredientList.add(new Ingredient("Dough"));
+                ingredientList.add(new Ingredient("Tomato Sauce"));
+                ingredientList.add(new Ingredient("Cheese"));
+                ingredientList.add(new Ingredient("Pepperoni"));
+
+                FoodItem pizza = new FoodItem("Pepperoni Pizza", ingredientList);
+                pepperoniPizzaMeal.addFood(pizza);
+
+                FoodItem stix = new FoodItem(IngredientlessItems.MOZZ_STIX.getValue(), new ArrayList<>());
+                pepperoniPizzaMeal.addFood(stix);
+
+                FoodItem cola = new FoodItem(IngredientlessItems.COLA.getValue(), new ArrayList<>());
+                pepperoniPizzaMeal.addFood(cola);
+
+                api.addMealToOrder(pepperoniPizzaMeal.getFoodList());
+            }
+
+            else if (e.getSource() == btn_meat_pizza){
+                Meal meatPizzaMeal = new Meal();
+                meatPizzaMeal.setMealName("Meat Lovers Pizza Meal");
+                
+                ArrayList<Ingredient> ingredientList = new ArrayList<>();
+                ingredientList.add(new Ingredient("Dough"));
+                ingredientList.add(new Ingredient("Tomato Sauce"));
+                ingredientList.add(new Ingredient("Cheese"));
+                ingredientList.add(new Ingredient("Pepperoni"));
+                ingredientList.add(new Ingredient("Sausage"));
+                ingredientList.add(new Ingredient("Ham"));
+                ingredientList.add(new Ingredient("Bacon"));
+
+                FoodItem pizza = new FoodItem("Meat Lovers Pizza", ingredientList);
+                meatPizzaMeal.addFood(pizza);
+
+                FoodItem stix = new FoodItem(IngredientlessItems.MOZZ_STIX.getValue(), new ArrayList<>());
+                meatPizzaMeal.addFood(stix);
+
+                FoodItem cola = new FoodItem(IngredientlessItems.COLA.getValue(), new ArrayList<>());
+                meatPizzaMeal.addFood(cola);
+
+                api.addMealToOrder(meatPizzaMeal.getFoodList());
+            }
+
+            else if (e.getSource() == btn_fries){
+                FoodItem fries = new FoodItem(IngredientlessItems.FRIES.getValue(), new ArrayList<>());
+                api.addItemToOrder(fries);
+            }
+
+            else if (e.getSource() == btn_tots){
+                FoodItem tots = new FoodItem(IngredientlessItems.TOTS.getValue(), new ArrayList<>());
+                api.addItemToOrder(tots);
+            }
+
+            else if (e.getSource() == btn_mozz_stix){
+                FoodItem stix = new FoodItem(IngredientlessItems.MOZZ_STIX.getValue(), new ArrayList<>());
+                api.addItemToOrder(stix);
+            }
+
+            else if (e.getSource() == btn_onion_rings){
+                FoodItem rings = new FoodItem(IngredientlessItems.ONION_RINGS.getValue(), new ArrayList<>());
+                api.addItemToOrder(rings);
+            }
+
+            else if (e.getSource() == btn_water){
+                FoodItem water = new FoodItem(IngredientlessItems.WATER.getValue(), new ArrayList<>());
+                api.addItemToOrder(water);
+            }
+
+            else if (e.getSource() == btn_cola){
+                FoodItem cola = new FoodItem(IngredientlessItems.COLA.getValue(), new ArrayList<>());
+                api.addItemToOrder(cola);
+            }
+
+            else if (e.getSource() == btn_coffee){
+                FoodItem coffee = new FoodItem(IngredientlessItems.COFFEE.getValue(), new ArrayList<>());
+                api.addItemToOrder(coffee);
+            }
+
+            else if (e.getSource() == btn_juice){
+                FoodItem juice = new FoodItem(IngredientlessItems.JUICE.getValue(), new ArrayList<>());
+                api.addItemToOrder(juice);
+            }
+
+            else if (e.getSource() == btn_delete_item){
                 int selectedIndex = summaryList.getSelectedIndex();
                 if (selectedIndex != -1){
                     api.removeItemFromOrder(selectedIndex);
                 }
             }
 
-            if (e.getSource() == btn_complete_order){
+            else if (e.getSource() == btn_complete_order){
                 try{
                     if(api.getOrder().getOrder().size() == 0)
                         return;
