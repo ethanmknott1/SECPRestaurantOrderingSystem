@@ -5,6 +5,7 @@ import foodobjects.Ingredient;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GuiAPI {
     private Order order = new Order();
@@ -55,12 +56,16 @@ public class GuiAPI {
         return order.getIngredientsByFoodID(ID);
     }
 
-    public void addIngredientByFoodID(int ID, Ingredient ingredient) {
-        order.addIngredientByFoodID(ID, ingredient);
+    public HashMap<String, Boolean> getIngredientsSelectedByFoodID(int ID) {
+        return order.getIngredientsSelectedByFoodID(ID);
     }
 
-    public void removeIngredientByFoodIDAndIngredientName(String ingredient, int foodID) {
-        order.removeIngredientByFoodIDAndIngredientName(ingredient, foodID);
+    public void addIngredientBackToItemByFoodID(int ID, String ingredientName) {
+        order.addIngredientBackToItemByFoodID(ID, ingredientName);
+    }
+
+    public void removeIngredientByFoodIDAndIngredientNameForList(String ingredient, int foodID) {
+        order.removeIngredientFromItemByFoodIDAndIngredientName(ingredient, foodID);
     }
 
     public String[] getFoodItemsFromOrder(){

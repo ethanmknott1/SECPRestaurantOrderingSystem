@@ -4,6 +4,7 @@ import foodobjects.FoodItem;
 import foodobjects.Ingredient;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Order {
     private ArrayList<FoodItem> order = new ArrayList<>();
@@ -50,18 +51,27 @@ public class Order {
         return null;
     }
 
-    public void addIngredientByFoodID(int ID, Ingredient ingredient) {
+    public HashMap<String, Boolean> getIngredientsSelectedByFoodID(int ID) {
         for(int i = 0; i < order.size(); i++) {
             if(ID == order.get(i).getID()) {
-                order.get(i).addIngredient(ingredient);
+                return order.get(i).getIngredientSelected();
+            }
+        }
+        return null;
+    }
+
+    public void addIngredientBackToItemByFoodID(int ID, String ingredient) {
+        for(int i = 0; i < order.size(); i++) {
+            if(ID == order.get(i).getID()) {
+                order.get(i).addIngredientBackToItem(ingredient);
             }
         }
     }
 
-    public void removeIngredientByFoodIDAndIngredientName(String ingredient, int foodID) {
+    public void removeIngredientFromItemByFoodIDAndIngredientName(String ingredient, int foodID) {
         for(int i = 0; i < order.size(); i++) {
             if(foodID == order.get(i).getID()) {
-                order.get(i).removeIngredient(ingredient);
+                order.get(i).removeIngredientFromFoodItem(ingredient);
             }
         }
     }
