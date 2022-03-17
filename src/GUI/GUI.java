@@ -1,20 +1,18 @@
-
+package GUI;
 // GUI dependencies
 import javax.swing.*; // Java GUI library
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import java.awt.BorderLayout;
 import java.awt.event.*;
 import java.io.IOException;
-import java.awt.GridLayout;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Color;
 
 // backend dependencies
 import orderflow.*;
 import foodobjects.*;
+
+import static java.awt.SystemColor.text;
 
 public class GUI {
     static GuiAPI api;
@@ -42,7 +40,7 @@ public class GUI {
     JPanel spacing0;
 
     // JList for showing order breakdown
-    JList<String> summaryList = new JList<String>();
+    JList<String> summaryList = new JList<>();
 
     // various JButtons for menu items and order options
     JButton btn_burger;
@@ -100,9 +98,9 @@ public class GUI {
         mainPanel.setLayout(layout);
 
         // Headers Panel
-        headersPanel = new JPanel();
+        headersPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel headers = new JLabel(
-                "<html><h1>Meals&emsp;&emsp;&emsp;&emsp;A La Carte&emsp;&emsp;&emsp;Summary</h1></html>");
+                "<html><h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Meals&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;A La Carte&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Summary</h1></html>", SwingConstants.LEFT);
         headersPanel.add(headers);
 
         // Center Panel that houses mealsPanel, aLaCartePanel, summaryPanel, and orderEditPanel
@@ -165,8 +163,6 @@ public class GUI {
         summaryList.setLayoutOrientation(JList.VERTICAL);
         summaryList.setVisibleRowCount(-1);
         summaryList.setPreferredSize(new Dimension(350, 900));
-        //JScrollPane listScroller = new JScrollPane(summaryList);
-        //listScroller.setPreferredSize(new Dimension(10, 10));
         summaryPanel.add(summaryList);
 
         // Order Edit Panel layout
@@ -271,11 +267,6 @@ public class GUI {
         itemOptionsFrame.pack();
         itemOptionsFrame.setVisible(true);
     }
-    /*
-    
-    public OrderCompletionMenu(){
-    
-    }*/
 
     public static void main(String[] args) {
         api = new GuiAPI();
