@@ -1,17 +1,22 @@
 package foodobjects;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class FoodItem {
     private ArrayList<Ingredient> ingredientList = new ArrayList<>();
+    private HashMap<String, Boolean> ingredientSelected = new HashMap<>();
     private String foodName;
     private int ID; //This will be an easy way to tell what item we need to delete from an order.
     private int price;
 
-    FoodItem(String foodName, int ID, ArrayList<Ingredient> ingredientList) {
+    public FoodItem(String foodName, ArrayList<Ingredient> ingredientList) {
         this.foodName = foodName;
-        this.ID = ID;
         this.ingredientList = ingredientList;
+
+        for(int i = 0; i < ingredientList.size(); i++) {
+            ingredientSelected.put(ingredientList.get(i).getIngredient(), Boolean.TRUE);
+        }
     }
 
     public String getFoodName() {
@@ -22,17 +27,12 @@ public class FoodItem {
         this.foodName = foodName;
     }
 
-    public void addIngredient(Ingredient ingredient) {
-        ingredientList.add(ingredient);
+    public void addIngredientBackToItem(String ingredient) {
+        ingredientSelected.put(ingredient, Boolean.TRUE);
     }
 
-    public void removeIngredient(String ingredientName) {
-        for(int i = 0; i < ingredientList.size(); i++) {
-            if(ingredientName.equalsIgnoreCase(ingredientList.get(i).getIngredient())) {
-                ingredientList.remove(i);
-                return;
-            }
-        }
+    public void removeIngredientFromFoodItem(String ingredientName) {
+        ingredientSelected.replace(ingredientName, Boolean.FALSE);
     }
 
     public ArrayList<Ingredient> getIngredientList() {
@@ -53,5 +53,9 @@ public class FoodItem {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public HashMap<String, Boolean> getIngredientSelected() {
+        return ingredientSelected;
     }
 }
