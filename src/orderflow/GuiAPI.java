@@ -81,6 +81,8 @@ public class GuiAPI {
 
     public void clearOrder() {
         this.order = new Order();
+        this.databaseOutputObject = new DatabaseOutput();
+        this.counter = 0;
     }
 
 }
