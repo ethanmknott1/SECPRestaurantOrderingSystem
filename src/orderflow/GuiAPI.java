@@ -16,12 +16,12 @@ public class GuiAPI {
         databaseOutputObject.backupOrderToTXTFile(order);
     }
 
-    public Order getOrder(){
+    public Order getOrder() {
         return order;
     }
 
     public void addMealToOrder(ArrayList<FoodItem> foodItems) {
-        for(int i = 0; i < foodItems.size(); i++) {
+        for (int i = 0; i < foodItems.size(); i++) {
             foodItems.get(i).setID(this.counter);
             this.counter++;
             order.addFood(foodItems.get(i));
@@ -37,7 +37,7 @@ public class GuiAPI {
     public int getTotalPrice() {
         int totalPrice = 0;
 
-        for(int i = 0; i < order.getOrder().size(); i++) {
+        for (int i = 0; i < order.getOrder().size(); i++) {
             totalPrice += order.getOrder().get(i).getPrice();
         }
 
@@ -46,6 +46,7 @@ public class GuiAPI {
 
     public void removeItemFromOrder(int ID) {
         order.deleteFoodByID(ID);
+        this.counter--;
     }
 
     public String getItemNameByID(int ID) {
@@ -68,17 +69,17 @@ public class GuiAPI {
         order.removeIngredientFromItemByFoodIDAndIngredientName(ingredient, foodID);
     }
 
-    public String[] getFoodItemsFromOrder(){
+    public String[] getFoodItemsFromOrder() {
         ArrayList<FoodItem> items = order.getOrder();
         String[] ret = new String[items.size()];
-        for (int i = 0; i < items.size(); i++){
+        for (int i = 0; i < items.size(); i++) {
             ret[i] = items.get(i).getFoodName();
         }
 
         return ret;
     }
 
-    public void clearOrder(){
+    public void clearOrder() {
         this.order = new Order();
     }
 

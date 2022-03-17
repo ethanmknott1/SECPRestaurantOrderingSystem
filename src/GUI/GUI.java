@@ -1,26 +1,29 @@
+
 // GUI dependencies
 import javax.swing.*; // Java GUI library
 import java.util.ArrayList;
-
-import foodobjects.FoodItem;
+import java.util.HashMap;
 
 import java.awt.BorderLayout;
 import java.awt.event.*;
 import java.io.IOException;
 import java.awt.GridLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Color;
 
 // backend dependencies
 import orderflow.*;
 import foodobjects.*;
 
-public class GUI{
+public class GUI {
     static GuiAPI api;
 
     // global GUI objects (so they may be defined in constructor and referenced via ActionListener)
     JFrame mainFrame;
-    
+
+    JFrame itemOptionsFrame;
+
     // panel components for housing various layouts and other components (JButton, JList)
     JPanel mainPanel;
     JPanel headersPanel;
@@ -29,6 +32,11 @@ public class GUI{
     JPanel aLaCartePanel;
     JPanel summaryPanel;
     JPanel orderEditPanel;
+
+    JPanel itemOptionsMainPanel;
+    JPanel itemOptionsHeadingPanel;
+    JPanel itemOptionsOptionPanel;
+    JPanel itemOptionsButtonsPanel;
 
     // panel specifically used for creating visual spacing in the mainFrame BorderLayout
     JPanel spacing0;
@@ -57,7 +65,10 @@ public class GUI{
     JButton btn_delete_item;
     JButton btn_complete_order;
 
-    public GUI(){
+    JButton btn_item_options_cancel;
+    JButton btn_item_options_save;
+
+    public GUI() {
         // create relevant buttons for the menu
         btn_burger = new JButton("<html>Single Cheeseburger<br />Side: Fries</html>");
         btn_double_burger = new JButton("<html>Double Cheeseburger<br />Side: Fries</html>");
@@ -81,7 +92,7 @@ public class GUI{
 
         // Main Frame and Panel
         mainFrame = new JFrame();
-        
+
         mainPanel = new JPanel();
         BorderLayout layout = new BorderLayout();
         layout.setHgap(100);
@@ -90,7 +101,8 @@ public class GUI{
 
         // Headers Panel
         headersPanel = new JPanel();
-        JLabel headers = new JLabel("<html><h1>Meals&emsp;&emsp;&emsp;&emsp;A La Carte&emsp;&emsp;&emsp;Summary</h1></html>");
+        JLabel headers = new JLabel(
+                "<html><h1>Meals&emsp;&emsp;&emsp;&emsp;A La Carte&emsp;&emsp;&emsp;Summary</h1></html>");
         headersPanel.add(headers);
 
         // Center Panel that houses mealsPanel, aLaCartePanel, summaryPanel, and orderEditPanel
@@ -123,7 +135,7 @@ public class GUI{
         mealsPanel.add(btn_pep_pizza);
         btn_meat_pizza.addActionListener(new CustomActionListener());
         mealsPanel.add(btn_meat_pizza);
-        
+
         // A La Carte Panel layout
         aLaCartePanel = new JPanel();
         GridLayout aLaCarteLayout = new GridLayout(0, 2);
@@ -161,7 +173,7 @@ public class GUI{
         orderEditPanel = new JPanel();
         GridLayout orderEditLayout = new GridLayout(3, 1);
         orderEditLayout.setHgap(10);
-        orderEditLayout.setVgap(80); 
+        orderEditLayout.setVgap(80);
         orderEditPanel.setLayout(orderEditLayout);
         btn_item_options.addActionListener(new CustomActionListener());
         orderEditPanel.add(btn_item_options);
@@ -184,7 +196,7 @@ public class GUI{
         mainPanel.add(headersPanel, BorderLayout.NORTH);
         mainPanel.add(centerPanel, BorderLayout.CENTER);
         mainPanel.add(spacing0, BorderLayout.SOUTH);
-        
+
         // Further define Main Frame layout and functionality
         mainFrame.add(mainPanel, BorderLayout.CENTER);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -195,26 +207,87 @@ public class GUI{
         mainFrame.setVisible(true);
     }
 
-    /*
-    public ItemOptionsMenu(){
+    public void ItemOptionsMenu(int itemIndex) {
 
+        //Button declaration
+        btn_item_options_save = new JButton("Save");
+        btn_item_options_cancel = new JButton("Cancel");
+
+        //Main frame declaration
+        itemOptionsFrame = new JFrame();
+
+        // Set up the main panel for the item options screen
+        itemOptionsMainPanel = new JPanel();
+        BorderLayout itemOptionsLayout = new BorderLayout();
+        itemOptionsLayout.setHgap(100);
+        itemOptionsLayout.setVgap(50);
+        itemOptionsMainPanel.setLayout(itemOptionsLayout);
+
+        // Set up the heading section of the item options screen
+        itemOptionsHeadingPanel = new JPanel();
+        JLabel itemName = new JLabel(api.getItemNameByID(itemIndex));
+        itemName.setBounds(0, 0, 100, 100);
+        itemName.setFont(new Font(null, Font.BOLD, 20));
+        itemOptionsHeadingPanel.add(itemName, BorderLayout.NORTH);
+
+        // Set up the options section of the item options screen
+        itemOptionsOptionPanel = new JPanel();
+        GridLayout itemOptionsOptionLayout = new GridLayout(0, 1);
+        itemOptionsOptionLayout.setHgap(10);
+        itemOptionsOptionLayout.setVgap(10);
+        itemOptionsOptionPanel.setLayout(itemOptionsOptionLayout);
+
+        // Set up the radio buttons for the item options screen
+        HashMap<String, Boolean> itemOptions = api.getIngredientsSelectedByFoodID(itemIndex);
+        //Loop through the hashmap and add the radio buttons to the panel per ingredient
+        for (HashMap.Entry<String, Boolean> entry : itemOptions.entrySet()) {
+            JRadioButton option = new JRadioButton(entry.getKey());
+            option.setSelected(entry.getValue());
+            itemOptionsOptionPanel.add(option);
+        }
+
+        // Set up the button section of the item options screen
+        itemOptionsButtonsPanel = new JPanel();
+        GridLayout itemOptionsButtonLayout = new GridLayout(0, 2);
+        itemOptionsButtonLayout.setHgap(10);
+        itemOptionsButtonLayout.setVgap(10);
+        itemOptionsButtonsPanel.setLayout(itemOptionsButtonLayout);
+        btn_item_options_save.addActionListener(new CustomActionListener());
+        itemOptionsButtonsPanel.add(btn_item_options_save);
+        btn_item_options_cancel.addActionListener(new CustomActionListener());
+        itemOptionsButtonsPanel.add(btn_item_options_cancel);
+
+        // Add all the panels to the main panel
+        itemOptionsMainPanel.add(itemOptionsHeadingPanel, BorderLayout.NORTH);
+        itemOptionsMainPanel.add(itemOptionsOptionPanel, BorderLayout.CENTER);
+        itemOptionsMainPanel.add(itemOptionsButtonsPanel, BorderLayout.SOUTH);
+
+        // Add the main panel to the frame and display it
+        itemOptionsFrame.add(itemOptionsMainPanel, BorderLayout.CENTER);
+        itemOptionsFrame.setSize(1000, 1000);
+        itemOptionsFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        itemOptionsFrame.setTitle("Item Options");
+
+        itemOptionsFrame.pack();
+        itemOptionsFrame.setVisible(true);
     }
-
+    /*
+    
     public OrderCompletionMenu(){
-
+    
     }*/
 
-    public static void main(String [] args){
+    public static void main(String[] args) {
         api = new GuiAPI();
         new GUI();
     }
 
-    class CustomActionListener implements ActionListener{
+    class CustomActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if(e.getSource() == btn_burger){
+            if (e.getSource() == btn_burger) {
                 Meal burgerMeal = new Meal();
                 burgerMeal.setMealName("Single Cheeseburger Meal");
-                
+
                 ArrayList<Ingredient> ingredientList = new ArrayList<>();
                 ingredientList.add(new Ingredient("Buns"));
                 ingredientList.add(new Ingredient("Beef Patty"));
@@ -225,7 +298,7 @@ public class GUI{
                 ingredientList.add(new Ingredient("Pickles"));
                 ingredientList.add(new Ingredient("Ketchup"));
                 ingredientList.add(new Ingredient("Mustard"));
-                
+
                 FoodItem burger = new FoodItem("Single Cheeseburger", ingredientList);
                 burgerMeal.addFood(burger);
 
@@ -236,10 +309,10 @@ public class GUI{
                 burgerMeal.addFood(cola);
 
                 api.addMealToOrder(burgerMeal.getFoodList());
-                
+
             }
 
-            else if (e.getSource() == btn_double_burger){
+            else if (e.getSource() == btn_double_burger) {
                 Meal doubleBurgerMeal = new Meal();
                 doubleBurgerMeal.setMealName("Double Cheeseburger Meal");
 
@@ -266,7 +339,7 @@ public class GUI{
                 api.addMealToOrder(doubleBurgerMeal.getFoodList());
             }
 
-            else if (e.getSource() == btn_crispy_sandwich){
+            else if (e.getSource() == btn_crispy_sandwich) {
                 Meal crispySandwichMeal = new Meal();
                 crispySandwichMeal.setMealName("Crispy Chicken Sandwich Meal");
 
@@ -289,7 +362,7 @@ public class GUI{
                 api.addMealToOrder(crispySandwichMeal.getFoodList());
             }
 
-            else if (e.getSource() == btn_grilled_sandwich){
+            else if (e.getSource() == btn_grilled_sandwich) {
                 Meal grilledSandwichMeal = new Meal();
                 grilledSandwichMeal.setMealName("Crispy Chicken Sandwich Meal");
 
@@ -312,7 +385,7 @@ public class GUI{
                 api.addMealToOrder(grilledSandwichMeal.getFoodList());
             }
 
-            else if (e.getSource() == btn_fish_sandwich){
+            else if (e.getSource() == btn_fish_sandwich) {
                 Meal fishSandwichMeal = new Meal();
                 fishSandwichMeal.setMealName("Fish Fillet Sandwich Meal");
 
@@ -335,7 +408,7 @@ public class GUI{
                 api.addMealToOrder(fishSandwichMeal.getFoodList());
             }
 
-            else if (e.getSource() == btn_nuggets){
+            else if (e.getSource() == btn_nuggets) {
                 Meal nuggetsMeal = new Meal();
                 nuggetsMeal.setMealName("10pc Nuggets Meal");
 
@@ -346,15 +419,15 @@ public class GUI{
                 nuggetsMeal.addFood(fries);
 
                 FoodItem cola = new FoodItem(IngredientlessItems.COLA.getValue(), new ArrayList<>());
-                fishSandwichMeal.addFood(cola);
+                nuggetsMeal.addFood(cola);
 
                 api.addMealToOrder(nuggetsMeal.getFoodList());
             }
 
-            else if (e.getSource() == btn_pep_pizza){
+            else if (e.getSource() == btn_pep_pizza) {
                 Meal pepperoniPizzaMeal = new Meal();
                 pepperoniPizzaMeal.setMealName("Pepperoni Pizza Meal");
-                
+
                 ArrayList<Ingredient> ingredientList = new ArrayList<>();
                 ingredientList.add(new Ingredient("Dough"));
                 ingredientList.add(new Ingredient("Tomato Sauce"));
@@ -373,10 +446,10 @@ public class GUI{
                 api.addMealToOrder(pepperoniPizzaMeal.getFoodList());
             }
 
-            else if (e.getSource() == btn_meat_pizza){
+            else if (e.getSource() == btn_meat_pizza) {
                 Meal meatPizzaMeal = new Meal();
                 meatPizzaMeal.setMealName("Meat Lovers Pizza Meal");
-                
+
                 ArrayList<Ingredient> ingredientList = new ArrayList<>();
                 ingredientList.add(new Ingredient("Dough"));
                 ingredientList.add(new Ingredient("Tomato Sauce"));
@@ -398,69 +471,109 @@ public class GUI{
                 api.addMealToOrder(meatPizzaMeal.getFoodList());
             }
 
-            else if (e.getSource() == btn_fries){
+            else if (e.getSource() == btn_fries) {
                 FoodItem fries = new FoodItem(IngredientlessItems.FRIES.getValue(), new ArrayList<>());
                 api.addItemToOrder(fries);
             }
 
-            else if (e.getSource() == btn_tots){
+            else if (e.getSource() == btn_tots) {
                 FoodItem tots = new FoodItem(IngredientlessItems.TOTS.getValue(), new ArrayList<>());
                 api.addItemToOrder(tots);
             }
 
-            else if (e.getSource() == btn_mozz_stix){
+            else if (e.getSource() == btn_mozz_stix) {
                 FoodItem stix = new FoodItem(IngredientlessItems.MOZZ_STIX.getValue(), new ArrayList<>());
                 api.addItemToOrder(stix);
             }
 
-            else if (e.getSource() == btn_onion_rings){
+            else if (e.getSource() == btn_onion_rings) {
                 FoodItem rings = new FoodItem(IngredientlessItems.ONION_RINGS.getValue(), new ArrayList<>());
                 api.addItemToOrder(rings);
             }
 
-            else if (e.getSource() == btn_water){
+            else if (e.getSource() == btn_water) {
                 FoodItem water = new FoodItem(IngredientlessItems.WATER.getValue(), new ArrayList<>());
                 api.addItemToOrder(water);
             }
 
-            else if (e.getSource() == btn_cola){
+            else if (e.getSource() == btn_cola) {
                 FoodItem cola = new FoodItem(IngredientlessItems.COLA.getValue(), new ArrayList<>());
                 api.addItemToOrder(cola);
             }
 
-            else if (e.getSource() == btn_coffee){
+            else if (e.getSource() == btn_coffee) {
                 FoodItem coffee = new FoodItem(IngredientlessItems.COFFEE.getValue(), new ArrayList<>());
                 api.addItemToOrder(coffee);
             }
 
-            else if (e.getSource() == btn_juice){
+            else if (e.getSource() == btn_juice) {
                 FoodItem juice = new FoodItem(IngredientlessItems.JUICE.getValue(), new ArrayList<>());
                 api.addItemToOrder(juice);
             }
 
-            else if (e.getSource() == btn_delete_item){
+            else if (e.getSource() == btn_item_options) {
                 int selectedIndex = summaryList.getSelectedIndex();
-                if (selectedIndex != -1){
+                if (selectedIndex != -1) {
+                    if (api.getIngredientsByFoodID(selectedIndex).size() > 0) {
+                        ItemOptionsMenu(selectedIndex);
+                    }
+                }
+            }
+
+            else if (e.getSource() == btn_delete_item) {
+                int selectedIndex = summaryList.getSelectedIndex();
+                if (selectedIndex != -1) {
                     api.removeItemFromOrder(selectedIndex);
                 }
             }
 
-            else if (e.getSource() == btn_complete_order){
-                try{
-                    if(api.getOrder().getOrder().size() == 0)
+            else if (e.getSource() == btn_complete_order) {
+                try {
+                    if (api.getOrder().getOrder().size() == 0)
                         return;
                     api.backupOrderToDatabase(api.getOrder());
                     api.clearOrder();
-                }
-                catch (IOException ex){
+                } catch (IOException ex) {
                     System.out.println("exception");
                 }
             }
-            
+
+            else if (e.getSource() == btn_item_options_save) {
+                //Gets the label from the heading to then find the index of where the food item is in the order
+                JLabel label = (JLabel) itemOptionsHeadingPanel.getComponent(0);
+                //Gets all food items from the order so during loop there are not significantly more than it needs to be
+                String[] foodItems = api.getFoodItemsFromOrder();
+                int index = -1;
+                //Finds the index of where the food item is in the order
+                for (int i = 0; i < foodItems.length; i++) {
+                    if (foodItems[i].equals(label.getText())) {
+                        index = i;
+                        break;
+                    }
+                }
+                //Loops through all of the options and checks if it is selected
+                //If it is, add the ingredient back to the food item
+                //If it is not, remove the ingredient from the food item
+                for (int i = 0; i < itemOptionsOptionPanel.getComponents().length; i++) {
+                    JRadioButton option = (JRadioButton) itemOptionsOptionPanel.getComponents()[i];
+                    if (option.isSelected()) {
+                        api.addIngredientBackToItemByFoodID(index, option.getText());
+                    } else {
+                        api.removeIngredientByFoodIDAndIngredientNameForList(option.getText(), index);
+                    }
+                }
+                // Dispose of the optoins frame as it is no longer needed
+                itemOptionsFrame.dispose();
+            }
+
+            else if (e.getSource() == btn_item_options_cancel) {
+                // Dispose of the optoins frame as it is no longer needed
+                itemOptionsFrame.dispose();
+            }
+
             summaryList.removeAll();
             summaryList.setListData(api.getFoodItemsFromOrder());
         }
-     }	
+    }
 
-    
 }
