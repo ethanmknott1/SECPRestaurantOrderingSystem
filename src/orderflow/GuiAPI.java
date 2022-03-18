@@ -34,8 +34,8 @@ public class GuiAPI {
         order.addFood(food);
     }
 
-    public int getTotalPrice() {
-        int totalPrice = 0;
+    public double getTotalPrice() {
+        double totalPrice = 0;
 
         for (int i = 0; i < order.getOrder().size(); i++) {
             totalPrice += order.getOrder().get(i).getPrice();
@@ -75,6 +75,17 @@ public class GuiAPI {
         for (int i = 0; i < items.size(); i++) {
             ret[i] = items.get(i).getFoodName();
         }
+
+        return ret;
+    }
+
+    public String[] getFoodItemsAndPriceFromOrder() {
+        ArrayList<FoodItem> items = order.getOrder();
+        String[] ret = new String[items.size()+1];
+        for (int i = 0; i < items.size(); i++) {
+            ret[i] = String.format("%06.2f | ", items.get(i).getPrice()) + items.get(i).getFoodName();
+        }
+        ret[items.size()] = String.format("%06.2f | TOTAL", getTotalPrice());
 
         return ret;
     }
