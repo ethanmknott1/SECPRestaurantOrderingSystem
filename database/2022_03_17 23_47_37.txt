@@ -1,0 +1,80 @@
+2022_03_17 23_47_37 ORDER
+
+ITEMS
+Fries $1.25
+
+Mozzarella Sticks $1.25
+
+Fish Fillet Sandwich $4.25
+    Buns
+    Fish Fillet
+    Cheese
+    Lettuce
+    Pickles
+
+Tater Tots $1.25
+
+Cola $1.25
+
+Chicken Nuggets $5.25
+
+Fries $1.25
+
+Cola $1.25
+
+Meat Lovers Pizza $8.25
+    Dough
+    Tomato Sauce
+    Cheese
+    Pepperoni
+    Sausage
+    Ham
+    Bacon
+
+Mozzarella Sticks $1.25
+
+Cola $1.25
+
+Pepperoni Pizza $7.25
+    Dough
+    Tomato Sauce
+    Cheese
+    Pepperoni
+
+Mozzarella Sticks $1.25
+
+Cola $1.25
+
+Single Cheeseburger $5.45
+    Buns
+    Beef Patty
+    Cheese
+    Lettuce
+    Tomato
+    Onion
+    Pickles
+    Ketchup
+    Mustard
+
+Fries $1.25
+
+Cola $1.25
+
+Double Cheeseburger $6.75
+    Buns
+    Beef Patty x2
+    Cheese
+    Lettuce
+    Tomato
+    Onion
+    Pickles
+    Ketchup
+    Mustard
+
+Fries $1.25
+
+Cola $1.25
+
+TOTAL
+$54.70
+

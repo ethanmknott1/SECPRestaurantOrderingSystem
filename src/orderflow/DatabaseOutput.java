@@ -24,8 +24,11 @@ public class DatabaseOutput {
         pw.println("");
         pw.println("ITEMS");
 
+        double total = 0;
+
         for(int i = 0; i < order.getOrder().size(); i++) {
-            pw.println(order.getOrder().get(i).getFoodName());
+            total += order.getOrder().get(i).getPrice();
+            pw.println(order.getOrder().get(i).getFoodName() + String.format(" $%.2f", order.getOrder().get(i).getPrice()));
             for(int j = 0; j < order.getOrder().get(i).getIngredientList().size(); j++) {
                 //This is where the output decides if an ingredient was selected or not
                 if (order.getOrder().get(i).getIngredientSelected().get(order.getOrder().get(i).getIngredientList().get(j).getIngredient())) {
@@ -34,6 +37,10 @@ public class DatabaseOutput {
             }
             pw.println("");
         }
+
+        pw.println("TOTAL");
+        pw.println(String.format("$%.2f", total));
+        pw.println("");
 
         pw.close();
         fw.close();

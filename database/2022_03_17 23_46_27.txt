@@ -1,0 +1,89 @@
+2022_03_17 23_46_27 ORDER
+
+ITEMS
+Fries $1.25
+
+TOTAL
+$1.25
+
+Mozzarella Sticks $1.25
+
+TOTAL
+$2.50
+
+Crispy Chicken Sandwich $5.25
+    Buns
+    Fried Chicken Breast
+    Tomato
+    Pickles
+    Mayo
+
+TOTAL
+$7.75
+
+Fries $1.25
+
+TOTAL
+$9.00
+
+Cola $1.25
+
+TOTAL
+$10.25
+
+Chicken Nuggets $5.25
+
+TOTAL
+$15.50
+
+Fries $1.25
+
+TOTAL
+$16.75
+
+Cola $1.25
+
+TOTAL
+$18.00
+
+Meat Lovers Pizza $8.25
+    Dough
+    Tomato Sauce
+    Cheese
+    Pepperoni
+    Sausage
+    Ham
+    Bacon
+
+TOTAL
+$26.25
+
+Mozzarella Sticks $1.25
+
+TOTAL
+$27.50
+
+Cola $1.25
+
+TOTAL
+$28.75
+
+Pepperoni Pizza $7.25
+    Dough
+    Tomato Sauce
+    Cheese
+    Pepperoni
+
+TOTAL
+$36.00
+
+Mozzarella Sticks $1.25
+
+TOTAL
+$37.25
+
+Cola $1.25
+
+TOTAL
+$38.50
+
