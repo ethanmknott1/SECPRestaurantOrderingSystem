@@ -504,7 +504,7 @@ public class GUI {
 
             else if (e.getSource() == btn_item_options) {
                 int selectedIndex = summaryList.getSelectedIndex();
-                if (selectedIndex != -1) {
+                if (selectedIndex != -1 && selectedIndex != summaryList.getModel().getSize()-1) {
                     if (api.getIngredientsByFoodID(selectedIndex).size() > 0) {
                         ItemOptionsMenu(selectedIndex);
                     }
@@ -513,7 +513,7 @@ public class GUI {
 
             else if (e.getSource() == btn_delete_item) {
                 int selectedIndex = summaryList.getSelectedIndex();
-                if (selectedIndex != -1) {
+                if (selectedIndex != -1 && selectedIndex != summaryList.getModel().getSize()-1) {
                     api.removeItemFromOrder(selectedIndex);
                 }
             }
