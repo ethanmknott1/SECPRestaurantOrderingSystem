@@ -1,0 +1,55 @@
+2022_03_17 22_12_05 ORDER
+
+ITEMS
+Single Cheeseburger
+    Buns
+    Beef Patty
+    Cheese
+    Lettuce
+    Tomato
+    Onion
+    Pickles
+    Ketchup
+    Mustard
+
+Fries
+
+Cola
+
+Double Cheeseburger
+    Buns
+    Beef Patty x2
+    Cheese
+    Tomato
+    Onion
+    Pickles
+    Ketchup
+    Mustard
+
+Fries
+
+Cola
+
+Grilled Chicken Sandwich
+    Buns
+    Grilled Chicken Breast
+    Tomato
+    Pickles
+    Mayo
+
+Fries
+
+Cola
+
+Fries
+
+Mozzarella Sticks
+
+Tater Tots
+
+Onion Rings
+
+Cola
+
+Water
+

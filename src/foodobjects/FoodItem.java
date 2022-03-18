@@ -8,11 +8,21 @@ public class FoodItem {
     private HashMap<String, Boolean> ingredientSelected = new HashMap<>();
     private String foodName;
     private int ID; //This will be an easy way to tell what item we need to delete from an order.
-    private int price;
+    private double price = 1.25;
 
     public FoodItem(String foodName, ArrayList<Ingredient> ingredientList) {
         this.foodName = foodName;
         this.ingredientList = ingredientList;
+
+        for(int i = 0; i < ingredientList.size(); i++) {
+            ingredientSelected.put(ingredientList.get(i).getIngredient(), Boolean.TRUE);
+        }
+    }
+
+    public FoodItem(String foodName, ArrayList<Ingredient> ingredientList, double price) {
+        this.foodName = foodName;
+        this.ingredientList = ingredientList;
+        this.price = price;
 
         for(int i = 0; i < ingredientList.size(); i++) {
             ingredientSelected.put(ingredientList.get(i).getIngredient(), Boolean.TRUE);
@@ -47,11 +57,11 @@ public class FoodItem {
         this.ID = ID;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

@@ -1,20 +1,18 @@
-
+package GUI;
 // GUI dependencies
 import javax.swing.*; // Java GUI library
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import java.awt.BorderLayout;
 import java.awt.event.*;
 import java.io.IOException;
-import java.awt.GridLayout;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Color;
 
 // backend dependencies
 import orderflow.*;
 import foodobjects.*;
+
+import static java.awt.SystemColor.text;
 
 public class GUI {
     static GuiAPI api;
@@ -42,7 +40,7 @@ public class GUI {
     JPanel spacing0;
 
     // JList for showing order breakdown
-    JList<String> summaryList = new JList<String>();
+    JList<String> summaryList = new JList<>();
 
     // various JButtons for menu items and order options
     JButton btn_burger;
@@ -100,9 +98,9 @@ public class GUI {
         mainPanel.setLayout(layout);
 
         // Headers Panel
-        headersPanel = new JPanel();
+        headersPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel headers = new JLabel(
-                "<html><h1>Meals&emsp;&emsp;&emsp;&emsp;A La Carte&emsp;&emsp;&emsp;Summary</h1></html>");
+                "<html><h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Meals&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;A La Carte&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Summary</h1></html>", SwingConstants.LEFT);
         headersPanel.add(headers);
 
         // Center Panel that houses mealsPanel, aLaCartePanel, summaryPanel, and orderEditPanel
@@ -165,8 +163,6 @@ public class GUI {
         summaryList.setLayoutOrientation(JList.VERTICAL);
         summaryList.setVisibleRowCount(-1);
         summaryList.setPreferredSize(new Dimension(350, 900));
-        //JScrollPane listScroller = new JScrollPane(summaryList);
-        //listScroller.setPreferredSize(new Dimension(10, 10));
         summaryPanel.add(summaryList);
 
         // Order Edit Panel layout
@@ -271,11 +267,6 @@ public class GUI {
         itemOptionsFrame.pack();
         itemOptionsFrame.setVisible(true);
     }
-    /*
-    
-    public OrderCompletionMenu(){
-    
-    }*/
 
     public static void main(String[] args) {
         api = new GuiAPI();
@@ -299,7 +290,7 @@ public class GUI {
                 ingredientList.add(new Ingredient("Ketchup"));
                 ingredientList.add(new Ingredient("Mustard"));
 
-                FoodItem burger = new FoodItem("Single Cheeseburger", ingredientList);
+                FoodItem burger = new FoodItem("Single Cheeseburger", ingredientList, 5.45);
                 burgerMeal.addFood(burger);
 
                 FoodItem fries = new FoodItem(IngredientlessItems.FRIES.getValue(), new ArrayList<>());
@@ -327,7 +318,7 @@ public class GUI {
                 ingredientList.add(new Ingredient("Ketchup"));
                 ingredientList.add(new Ingredient("Mustard"));
 
-                FoodItem burger = new FoodItem("Double Cheeseburger", ingredientList);
+                FoodItem burger = new FoodItem("Double Cheeseburger", ingredientList, 6.75);
                 doubleBurgerMeal.addFood(burger);
 
                 FoodItem fries = new FoodItem(IngredientlessItems.FRIES.getValue(), new ArrayList<>());
@@ -350,7 +341,7 @@ public class GUI {
                 ingredientList.add(new Ingredient("Pickles"));
                 ingredientList.add(new Ingredient("Mayo"));
 
-                FoodItem sandwich = new FoodItem("Crispy Chicken Sandwich", ingredientList);
+                FoodItem sandwich = new FoodItem("Crispy Chicken Sandwich", ingredientList, 5.25);
                 crispySandwichMeal.addFood(sandwich);
 
                 FoodItem fries = new FoodItem(IngredientlessItems.FRIES.getValue(), new ArrayList<>());
@@ -364,7 +355,7 @@ public class GUI {
 
             else if (e.getSource() == btn_grilled_sandwich) {
                 Meal grilledSandwichMeal = new Meal();
-                grilledSandwichMeal.setMealName("Crispy Chicken Sandwich Meal");
+                grilledSandwichMeal.setMealName("Grilled Chicken Sandwich Meal");
 
                 ArrayList<Ingredient> ingredientList = new ArrayList<>();
                 ingredientList.add(new Ingredient("Buns"));
@@ -373,7 +364,7 @@ public class GUI {
                 ingredientList.add(new Ingredient("Pickles"));
                 ingredientList.add(new Ingredient("Mayo"));
 
-                FoodItem sandwich = new FoodItem("Grilled Chicken Sandwich", ingredientList);
+                FoodItem sandwich = new FoodItem("Grilled Chicken Sandwich", ingredientList, 6.24);
                 grilledSandwichMeal.addFood(sandwich);
 
                 FoodItem fries = new FoodItem(IngredientlessItems.FRIES.getValue(), new ArrayList<>());
@@ -396,7 +387,7 @@ public class GUI {
                 ingredientList.add(new Ingredient("Lettuce"));
                 ingredientList.add(new Ingredient("Pickles"));
 
-                FoodItem sandwich = new FoodItem("Fish Fillet Sandwich", ingredientList);
+                FoodItem sandwich = new FoodItem("Fish Fillet Sandwich", ingredientList, 4.25);
                 fishSandwichMeal.addFood(sandwich);
 
                 FoodItem tots = new FoodItem(IngredientlessItems.TOTS.getValue(), new ArrayList<>());
@@ -412,7 +403,7 @@ public class GUI {
                 Meal nuggetsMeal = new Meal();
                 nuggetsMeal.setMealName("10pc Nuggets Meal");
 
-                FoodItem nugs = new FoodItem(IngredientlessItems.NUGS.getValue(), new ArrayList<>());
+                FoodItem nugs = new FoodItem(IngredientlessItems.NUGS.getValue(), new ArrayList<>(), 5.25);
                 nuggetsMeal.addFood(nugs);
 
                 FoodItem fries = new FoodItem(IngredientlessItems.FRIES.getValue(), new ArrayList<>());
@@ -434,7 +425,7 @@ public class GUI {
                 ingredientList.add(new Ingredient("Cheese"));
                 ingredientList.add(new Ingredient("Pepperoni"));
 
-                FoodItem pizza = new FoodItem("Pepperoni Pizza", ingredientList);
+                FoodItem pizza = new FoodItem("Pepperoni Pizza", ingredientList, 7.25);
                 pepperoniPizzaMeal.addFood(pizza);
 
                 FoodItem stix = new FoodItem(IngredientlessItems.MOZZ_STIX.getValue(), new ArrayList<>());
@@ -459,7 +450,7 @@ public class GUI {
                 ingredientList.add(new Ingredient("Ham"));
                 ingredientList.add(new Ingredient("Bacon"));
 
-                FoodItem pizza = new FoodItem("Meat Lovers Pizza", ingredientList);
+                FoodItem pizza = new FoodItem("Meat Lovers Pizza", ingredientList, 8.25);
                 meatPizzaMeal.addFood(pizza);
 
                 FoodItem stix = new FoodItem(IngredientlessItems.MOZZ_STIX.getValue(), new ArrayList<>());
@@ -572,7 +563,7 @@ public class GUI {
             }
 
             summaryList.removeAll();
-            summaryList.setListData(api.getFoodItemsFromOrder());
+            summaryList.setListData(api.getFoodItemsAndPriceFromOrder());
         }
     }
 
