@@ -13,3 +13,5 @@ There is no need to compile any of the .java files included in the repo. However
   1. Open a terminal and navigate to the src folder
   2. Enter the following command:
       - javac foodobjects\*.java GUI\*.java orderflow\*.java
+  3. After compilation is finished, you may run the program by running the following command:
+      - java GUI\GUI.java
