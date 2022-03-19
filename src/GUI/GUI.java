@@ -1,4 +1,5 @@
 package GUI;
+
 // GUI dependencies
 import javax.swing.*; // Java GUI library
 import java.awt.*;
@@ -100,7 +101,8 @@ public class GUI {
         // Headers Panel
         headersPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel headers = new JLabel(
-                "<html><h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Meals&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;A La Carte&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Summary</h1></html>", SwingConstants.LEFT);
+                "<html><h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Meals&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;A La Carte&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Summary</h1></html>",
+                SwingConstants.LEFT);
         headersPanel.add(headers);
 
         // Center Panel that houses mealsPanel, aLaCartePanel, summaryPanel, and orderEditPanel
@@ -260,8 +262,8 @@ public class GUI {
 
         // Add the main panel to the frame and display it
         itemOptionsFrame.add(itemOptionsMainPanel, BorderLayout.CENTER);
-        itemOptionsFrame.setSize(1000, 1000);
         itemOptionsFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        itemOptionsFrame.setLocation(960, 540);
         itemOptionsFrame.setTitle("Item Options");
 
         itemOptionsFrame.pack();
@@ -504,7 +506,7 @@ public class GUI {
 
             else if (e.getSource() == btn_item_options) {
                 int selectedIndex = summaryList.getSelectedIndex();
-                if (selectedIndex != -1 && selectedIndex != summaryList.getModel().getSize()-1) {
+                if (selectedIndex != -1 && selectedIndex != summaryList.getModel().getSize() - 1) {
                     if (api.getIngredientsByFoodID(selectedIndex).size() > 0) {
                         ItemOptionsMenu(selectedIndex);
                     }
@@ -513,7 +515,7 @@ public class GUI {
 
             else if (e.getSource() == btn_delete_item) {
                 int selectedIndex = summaryList.getSelectedIndex();
-                if (selectedIndex != -1 && selectedIndex != summaryList.getModel().getSize()-1) {
+                if (selectedIndex != -1 && selectedIndex != summaryList.getModel().getSize() - 1) {
                     api.removeItemFromOrder(selectedIndex);
                 }
             }

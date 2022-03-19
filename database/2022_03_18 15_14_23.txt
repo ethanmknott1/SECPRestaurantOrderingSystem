@@ -1,0 +1,34 @@
+2022_03_18 15_14_23 ORDER
+
+ITEMS
+Single Cheeseburger $5.45
+    Buns
+    Beef Patty
+    Cheese
+    Lettuce
+    Tomato
+    Onion
+    Pickles
+    Mustard
+
+Fries $1.25
+
+Fries $1.25
+
+Fries $1.25
+
+Fries $1.25
+
+Fries $1.25
+
+Fries $1.25
+
+Fries $1.25
+
+Fries $1.25
+
+Fries $1.25
+
+TOTAL
+$16.70
+
