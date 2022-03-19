@@ -1,8 +1,0 @@
-D:\Personal Files\Crappy Programs\SECPRestaurantOrderingSystem\src\Main.java
-D:\Personal Files\Crappy Programs\SECPRestaurantOrderingSystem\src\foodobjects\FoodItem.java
-D:\Personal Files\Crappy Programs\SECPRestaurantOrderingSystem\src\foodobjects\Ingredient.java
-D:\Personal Files\Crappy Programs\SECPRestaurantOrderingSystem\src\foodobjects\IngredientlessItems.java
-D:\Personal Files\Crappy Programs\SECPRestaurantOrderingSystem\src\foodobjects\Meal.java
-D:\Personal Files\Crappy Programs\SECPRestaurantOrderingSystem\src\GUI\GUI.java
-D:\Personal Files\Crappy Programs\SECPRestaurantOrderingSystem\src\orderflow\GuiAPI.java
-D:\Personal Files\Crappy Programs\SECPRestaurantOrderingSystem\src\orderflow\Order.java
