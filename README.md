@@ -11,7 +11,5 @@ After downloading this repository, you may run the ordering system application b
 
 There is no need to compile any of the .java files included in the repo. However, if you would like to compile all of the .java files anyway, you may do the following:
   1. Open a terminal and navigate to the src folder
-  2. Enter the followings commands:
-      - javac foodobjects\*.java
-      - javac GUI\*.java
-      - javac orderflow\*.java
+  2. Enter the following command:
+      - javac foodobjects\*.java GUI\*.java orderflow\*.java
