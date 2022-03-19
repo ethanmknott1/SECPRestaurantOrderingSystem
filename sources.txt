@@ -1,8 +1,0 @@
-C:\Users\"Owen Bickel"\Documents\GitHub\SECPRestaurantOrderingSystem\src\Main.java
-C:\Users\"Owen Bickel"\Documents\GitHub\SECPRestaurantOrderingSystem\src\foodobjects\FoodItem.java
-C:\Users\"Owen Bickel"\Documents\GitHub\SECPRestaurantOrderingSystem\src\foodobjects\Ingredient.java
-C:\Users\"Owen Bickel"\Documents\GitHub\SECPRestaurantOrderingSystem\src\foodobjects\IngredientlessItems.java
-C:\Users\"Owen Bickel"\Documents\GitHub\SECPRestaurantOrderingSystem\src\foodobjects\Meal.java
-C:\Users\"Owen Bickel"\Documents\GitHub\SECPRestaurantOrderingSystem\src\GUI\GUI.java
-C:\Users\"Owen Bickel"\Documents\GitHub\SECPRestaurantOrderingSystem\src\orderflow\GuiAPI.java
-C:\Users\"Owen Bickel"\Documents\GitHub\SECPRestaurantOrderingSystem\src\orderflow\Order.java
